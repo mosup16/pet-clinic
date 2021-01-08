@@ -1,12 +1,14 @@
 package com.mo16.petclinic.Service.springdatajpa;
 
+import com.mo16.petclinic.Service.CrudService;
 import com.mo16.petclinic.model.BaseEntity;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class DataJpnAbstractService<ID, Entity extends BaseEntity<ID>, Repository extends CrudRepository<Entity, ID>> {
+public class DataJpnAbstractService<ID, Entity extends BaseEntity<ID>, Repository extends CrudRepository<Entity, ID>>
+        implements CrudService<ID ,Entity> {
 
     Repository repository;
 
@@ -18,6 +20,7 @@ public class DataJpnAbstractService<ID, Entity extends BaseEntity<ID>, Repositor
         return repository.findById(id).orElse(null);
     }
 
+    // todo O(N) should be O(1) in findAll()
     public Set<Entity> findAll() {
         HashSet<Entity> owners = new HashSet<>();
         repository.findAll().forEach(owners::add);
@@ -32,6 +35,7 @@ public class DataJpnAbstractService<ID, Entity extends BaseEntity<ID>, Repositor
         if (object != null) {
             ID id = object.getId();
             if (id != null) {
+                // todo fix useless check for the existence of entity in update(Entity object)
                 if (repository.existsById(id)) {
                     repository.deleteById(id);
                     object = repository.save(object);

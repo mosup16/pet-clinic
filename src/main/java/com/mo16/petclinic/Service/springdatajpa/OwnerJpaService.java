@@ -23,4 +23,9 @@ public class OwnerJpaService extends DataJpnAbstractService<Long, Owner, OwnerRe
         return repository.findByLastName(name);
     }
 
+    @Override
+    public Set<Owner> findByLastNameLike(String lastName) {
+        return repository.findByLastNameLike(lastName);
+    }
+
 }

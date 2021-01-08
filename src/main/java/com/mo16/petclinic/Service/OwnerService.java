@@ -7,4 +7,7 @@ import java.util.Set;
 
 public interface OwnerService extends CrudService<Long, Owner> {
     Set<Owner> findByLastName(String name);
+
+    Set<Owner> findByLastNameLike(String lastName);
+
 }

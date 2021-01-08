@@ -1,5 +1,6 @@
 package com.mo16.petclinic.Service.map;
 
+import com.mo16.petclinic.Service.CrudService;
 import com.mo16.petclinic.model.BaseEntity;
 
 import java.io.Serializable;
@@ -8,19 +9,19 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class MapAbstractService<ID, T extends BaseEntity> implements Serializable {
+public class MapAbstractService<ID, T extends BaseEntity> implements Serializable , CrudService<ID, T> {
 
     protected Map<ID, T> map = new HashMap<>();
 
-    Set<T> findAll() {
+    public Set<T> findAll() {
         return new HashSet<>(map.values());
     }
 
-    T findById(ID id) {
+    public T findById(ID id) {
         return map.get(id);
     }
 
-    T save(T object) {
+    public T save(T object) {
         if (object == null) throw new RuntimeException(" -> There is no Entity to be Saved Entity is Null");
         Object id = object.getId();
         if (id != null) {
@@ -33,7 +34,7 @@ public class MapAbstractService<ID, T extends BaseEntity> implements Serializabl
         return object;
     }
 
-    T update(T object) {
+    public T update(T object) {
         if (object.getId() == null)
             throw new RuntimeException(" -> The Id of the desired entity to be updated is missing");
         map.remove(object.getId());
@@ -41,11 +42,11 @@ public class MapAbstractService<ID, T extends BaseEntity> implements Serializabl
         return object;
     }
 
-    void deleteByID(ID id) {
+    public void deleteByID(ID id) {
         map.remove(id);
     }
 
-    void delete(T object) {
+    public void delete(T object) {
         map.remove(object.getId());
     }
 

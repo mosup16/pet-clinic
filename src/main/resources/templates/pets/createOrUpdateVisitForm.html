@@ -7,7 +7,7 @@
     <th:block th:if="${visit['new']}">New</th:block>
     Visit
 </h2>
-
+<!--/*@thymesVar id="pet" type="com.mo16.petclinic.model.Pet"*/-->
 <b>Pet</b>
 <table class="table table-striped">
     <thead>
@@ -19,15 +19,15 @@
     </tr>
     </thead>
     <tr>
-        <td th:text="${pet.name}"/>
+        <td th:text="${pet.name}"></td>
         </td>
         <td
-                th:text="${#temporals.format(pet.birthDate, 'yyyy-MM-dd')}"/>
+                th:text="${#temporals.format(pet.birthDate, 'yyyy-MM-dd')}"></td>
         </td>
-        <td th:text="${pet.type}"/>
+        <td th:text="${pet.petType}"></td>
         </td>
         <td
-                th:text="${pet.owner?.firstName + ' ' + pet.owner?.lastName}"/>
+                th:text="${pet.petOwner?.firstName + ' ' + pet.petOwner?.lastName}"></td>
         </td>
     </tr>
 </table>
@@ -56,9 +56,9 @@
         <th>Description</th>
     </tr>
     <tr th:if="${!visit['new']}" th:each="visit : ${pet.visits}">
-        <td th:text="${#temporals.format(visit.date, 'yyyy-MM-dd')}"/>
+        <td th:text="${#temporals.format(visit.date, 'yyyy-MM-dd')}"></td>
         </td>
-        <td th:text=" ${visit.description}"/>
+        <td th:text=" ${visit.description}"></td>
         </td>
     </tr>
 </table>

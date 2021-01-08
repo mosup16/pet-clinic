@@ -9,6 +9,7 @@
 <h2>Owner Information</h2>
 
 
+<!--/*@thymesVar id="owner" type="com.mo16.petclinic.model.Owner"*/-->
 <table class="table table-striped" th:object="${owner}">
     <tr>
         <th>Name</th>
@@ -43,18 +44,18 @@
 
 <table class="table table-striped">
 
-    <tr th:each="pet : ${owner.pets}">
+    <tr th:each="pet : ${owner?.pets}">
         <td valign="top">
             <dl class="dl-horizontal">
                 <dt>Name</dt>
-                <dd th:text="${pet.name}"/>
+                <dd th:text="${pet.name}"></dd>
                 </dd>
                 <dt>Birth Date</dt>
                 <dd
-                        th:text="${#temporals.format(pet.birthDate, 'yyyy-MM-dd')}"/>
+                        th:text="${#temporals.format(pet.birthDate, 'yyyy-MM-dd')}"></dd>
                 </dd>
                 <dt>Type</dt>
-                <dd th:text="${pet.type}"/>
+                <dd th:text="${pet?.petType?.getName()}"></dd>
                 </dd>
             </dl>
         </td>

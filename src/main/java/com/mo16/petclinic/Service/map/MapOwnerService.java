@@ -66,7 +66,7 @@ public class MapOwnerService extends MapAbstractService<Long, Owner> implements 
                             System.out.println(pet.getName());
                             Pet savedPet = petService.save(pet);
                             pet.setId(savedPet.getId());
-                        }// else ignore
+                        }// todo - else ignore
                     });
                 } else throw new RuntimeException(" -> Owner Should has pets to be persisted");
             } else throw new RuntimeException(" -> Owner.getPets returned null");
@@ -80,6 +80,15 @@ public class MapOwnerService extends MapAbstractService<Long, Owner> implements 
                 .values()
                 .stream()
                 .filter(it -> it.getLastName().equals(name))
+                .collect(Collectors.toSet());
+    }
+
+    @Override
+    public Set<Owner> findByLastNameLike(String lastName) {
+        return map
+                .values()
+                .stream()
+                .filter(it -> it.getLastName().contains(lastName))
                 .collect(Collectors.toSet());
     }
 }

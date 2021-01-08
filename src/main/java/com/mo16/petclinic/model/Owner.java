@@ -35,4 +35,9 @@ public class Owner extends Person {
         if (pets == null) this.pets = new HashSet<>();
         return pets;
     }
+
+    public void addPet(Pet pet) {
+        pet.setPetOwner(this);
+        getPets().add(pet);
+    }
 }

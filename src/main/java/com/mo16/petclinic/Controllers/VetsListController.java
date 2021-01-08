@@ -4,7 +4,7 @@ import com.mo16.petclinic.Service.VetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class VetsListController {
@@ -16,9 +16,9 @@ public class VetsListController {
         this.vetService = vetService;
     }
 
-    @RequestMapping({"/vets", "/vets.html"})
+    @GetMapping({"/vets", "/vets.html"})
     public String VetList(Model model) {
         model.addAttribute("vets", vetService.findAll());
-        return "vets";
+        return "vets/vetList";
     }
 }
